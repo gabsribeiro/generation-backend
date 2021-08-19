@@ -1,0 +1,38 @@
+CREATE DATABASE db_farmacia_do_bem;
+USE db_farmacia_do_bem;
+CREATE TABLE tb_categoria(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    generico BOOLEAN,
+    tipo VARCHAR(50)
+);
+CREATE TABLE tb_produto(
+	id_produto INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50),
+    marca VARCHAR(50),
+    armazenamento VARCHAR(50),
+    estoque INT(5),
+    valor FLOAT(10,2),
+    id_categoria INT, FOREIGN KEY (id_categoria) REFERENCES tb_categoria(id)
+);
+INSERT INTO tb_categoria VALUES
+(NULL, true, "COMPRIMIDO"),
+(NULL, false, "COMPRIMIDO"),
+(NULL, true, "LÍQUIDO"),
+(NULL, false, "LÍQUIDO"),
+(NULL, true, "CÁPSULA"),
+(NULL, false, "CÁPSULA");
+
+INSERT INTO tb_produto VALUES
+(NULL, "DIPIRONA MONOIDRATADA", "NOVALGINA", "TEMPERATURA AMBIENTE", 2000, 17.90, 4),
+(NULL, "BUTILBROMETO DE ESCOPOLAMINA", "BUSCOPAN", "TEMPERATURA AMBIENTE", 1500, 14.40, 2),
+(NULL, "MALEATO DE DEXCLORFENIRAMINA", "NEOQUÍMICA", "TEMPERATURA AMBIENTE", 5000, 7.80, 3),
+(NULL, "PARACETAMOL", "TEUTO", "TEMPERATURA AMBIENTE", 6000, 8.90, 1),
+(NULL, "IBUPROFENO", "TEUTO", "TEMPERATURA AMBIENTE", 4000, 12.50, 5),
+(NULL, "HIDRÓXIDO DE ALUMÍNIO", "EMS", "TEMPERATURA AMBIENTE", 500, 8.90, 3),
+(NULL, "IBUPROFENO", "IBUFLEX", "TEMPERATURA AMBIENTE", 1000, 12.90, 6),
+(NULL, "LATANOPROSTA E TIMOLOL MALEATO", "PFIZER", "MANTER REFRIGERADO", 200, 115.40, 3); 
+
+SELECT * FROM tb_produto WHERE valor>50.00;
+SELECT * FROM tb_produto WHERE valor>3.00 and valor<60.00;
+SELECT * FROM tb_produto WHERE nome LIKE "B%";
+SELECT * FROM tb_produto INNER JOIN tb_categoria ON tb_categoria.id=tb_produto.id_categoria;
