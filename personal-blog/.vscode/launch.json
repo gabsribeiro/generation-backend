@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Turma29Application<turma29>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.personalblog.turma29.Turma29Application",
+            "projectName": "turma29",
+            "args": ""
+        }
+    ]
+}
