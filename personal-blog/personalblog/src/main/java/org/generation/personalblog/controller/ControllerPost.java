@@ -21,17 +21,13 @@ public class ControllerPost {
 	private RepositoryPost repository;
 
 	@GetMapping
-	public ResponseEntity<List<Post>> GetAll() {
-		return ResponseEntity.ok(repository.findAll());
-	}
+	public ResponseEntity<List<Post>> getAll() {
+		List<Post> listObject = repository.findAll();
 
-	@GetMapping("/{id}")
-	public ResponseEntity<Post> GetById(@PathVariable Long id) {
-		return repository.findById(id).map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.notFound().build());
-	}
-
-	@GetMapping("/title/{title}")
-	public ResponseEntity<List<Post>> GetByTitulo(@PathVariable String title) {
-		return ResponseEntity.ok(repository.findAllByTitleContainingIgnoreCase(title));
+		if (listObject.isEmpty()) {
+			return ResponseEntity.status(204).build();
+		} else {
+			return ResponseEntity.status(200).body(listObject);
+		}
 	}
 }
