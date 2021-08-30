@@ -21,14 +21,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/post")
+@RequestMapping("/api/v1/post")
 @CrossOrigin("*")
 public class ControllerPost {
 
 	@Autowired
 	private RepositoryPost repository;
 
-	@GetMapping
+	@GetMapping("/all")
 	public ResponseEntity<List<Post>> getAll() {
 		List<Post> listObject = repository.findAll();
 
