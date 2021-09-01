@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-PersonalblogApplication<personalblog>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "org.generation.personalblog.PersonalblogApplication",
+            "projectName": "personalblog",
+            "args": ""
+        }
+    ]
+}

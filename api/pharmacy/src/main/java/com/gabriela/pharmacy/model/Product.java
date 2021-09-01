@@ -25,10 +25,10 @@ public class Product {
 	private float price;
 
 	private int amount;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "category_id")
-	@JsonIgnoreProperties({"product"})
+	@JsonIgnoreProperties({ "product" })
 	private Category category;
 
 	public Long getIdProduct() {
@@ -61,6 +61,14 @@ public class Product {
 
 	public void setAmount(int amount) {
 		this.amount = amount;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 }

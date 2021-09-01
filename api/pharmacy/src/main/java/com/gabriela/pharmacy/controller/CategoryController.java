@@ -21,7 +21,7 @@ import com.gabriela.pharmacy.model.Category;
 import com.gabriela.pharmacy.repository.CategoryRepository;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/category")
 @CrossOrigin("*")
 public class CategoryController {
 

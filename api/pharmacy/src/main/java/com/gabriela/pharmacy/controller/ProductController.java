@@ -21,7 +21,7 @@ import com.gabriela.pharmacy.model.Product;
 import com.gabriela.pharmacy.repository.ProductRepository;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/product")
 @CrossOrigin("*")
 public class ProductController {
 
