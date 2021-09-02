@@ -14,6 +14,11 @@ import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "tb_table")
 public class Theme {
@@ -28,29 +33,5 @@ public class Theme {
 	@OneToMany(mappedBy = "relatedTheme", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties({ "relatedTheme" })
 	private List<Post> themePosts = new ArrayList<>();
-
-	public Long getIdTheme() {
-		return idTheme;
-	}
-
-	public void setIdTheme(Long idTheme) {
-		this.idTheme = idTheme;
-	}
-
-	public String getTheme() {
-		return theme;
-	}
-
-	public void setTheme(String theme) {
-		this.theme = theme;
-	}
-
-	public List<Post> getPosts() {
-		return themePosts;
-	}
-
-	public void setPosts(List<Post> posts) {
-		this.themePosts = posts;
-	}
 
 }
