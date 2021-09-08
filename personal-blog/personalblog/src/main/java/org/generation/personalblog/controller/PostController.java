@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.generation.personalblog.model.Post;
+import org.generation.personalblog.model.PostModel;
 import org.generation.personalblog.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +28,8 @@ public class PostController {
 	private PostRepository repository;
 
 	@GetMapping("/all")
-	public ResponseEntity<List<Post>> findAll() {
-		List<Post> listObject = repository.findAll();
+	public ResponseEntity<List<PostModel>> findAll() {
+		List<PostModel> listObject = repository.findAll();
 
 		if (listObject.isEmpty()) {
 			return ResponseEntity.status(204).build();
@@ -39,8 +39,8 @@ public class PostController {
 	}
 
 	@GetMapping("/{id_post}")
-	public ResponseEntity<Post> findById(@PathVariable(value = "id_post") Long idPost) {
-		Optional<Post> postObject = repository.findById(idPost);
+	public ResponseEntity<PostModel> findById(@PathVariable(value = "id_post") Long idPost) {
+		Optional<PostModel> postObject = repository.findById(idPost);
 
 		if (postObject.isPresent()) {
 			return ResponseEntity.status(200).body(postObject.get());
@@ -50,8 +50,8 @@ public class PostController {
 	}
 
 	@GetMapping("/title/{title}")
-	public ResponseEntity<List<Post>> findByTitle(@PathVariable(value = "title") String title) {
-		List<Post> listObject = repository.findAllByTitleContainingIgnoreCase(title);
+	public ResponseEntity<List<PostModel>> findByTitle(@PathVariable(value = "title") String title) {
+		List<PostModel> listObject = repository.findAllByTitleContainingIgnoreCase(title);
 
 		if (listObject.isEmpty()) {
 			return ResponseEntity.status(204).build();
@@ -61,12 +61,12 @@ public class PostController {
 	}
 
 	@PostMapping("/save")
-	public ResponseEntity<Post> save(@Valid @RequestBody Post newPost) {
+	public ResponseEntity<PostModel> save(@Valid @RequestBody PostModel newPost) {
 		return ResponseEntity.status(201).body(repository.save(newPost));
 	}
 
 	@PutMapping("/update")
-	public ResponseEntity<Post> update(@Valid @RequestBody Post postToUpdate) {
+	public ResponseEntity<PostModel> update(@Valid @RequestBody PostModel postToUpdate) {
 		return ResponseEntity.status(201).body(repository.save(postToUpdate));
 	}
 

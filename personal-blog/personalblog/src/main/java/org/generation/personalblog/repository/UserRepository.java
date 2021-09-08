@@ -3,14 +3,14 @@ package org.generation.personalblog.repository;
 import java.util.List;
 import java.util.Optional;
 
-import org.generation.personalblog.model.User;
+import org.generation.personalblog.model.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<UserModel, Long> {
 
-	public List<User> findAllByNameContainingIgnoreCase(String name);
+	public List<UserModel> findAllByNameContainingIgnoreCase(String name);
 	
-	Optional<User> findByEmail(String email);
+	Optional<UserModel> findByEmail(String email);
 }
