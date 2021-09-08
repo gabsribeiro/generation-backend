@@ -5,8 +5,11 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.apache.catalina.connector.Response;
 import org.generation.personalblog.model.UserModel;
 import org.generation.personalblog.repository.UserRepository;
+import org.generation.personalblog.service.UserService;
+import org.generation.personalblog.utility.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,12 +23,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 @CrossOrigin("*")
 public class UserController {
 
 	@Autowired
 	private UserRepository repository;
+
+	@Autowired
+	UserService service;
+
+	@PostMapping("/register")
+	public ResponseEntity<Object> registerUser(@Valid @RequestBody UserModel newUser) {
+		Optional<Object> registeredObject = service.registerUser(newUser);
+		if (registeredObject.isPresent()) {
+			return ResponseEntity.status(201).body(registeredObject.get());
+		} else {
+			return ResponseEntity.status(400).build();
+		}
+	}
+
+	@PutMapping("/auth")
+	public ResponseEntity<Object> getCredentials(@Valid @RequestBody UserDTO loginPassword) {
+		Optional<?> accreditedObject = service.getCredentials(loginPassword);
+		if(accreditedObject.isPresent()) {
+			return ResponseEntity.status(201).body(accreditedObject.get());
+		} else {
+			return ResponseEntity.status(400).build();
+		}
+	}
 
 	@GetMapping("/all")
 	public ResponseEntity<List<UserModel>> findAll() {
