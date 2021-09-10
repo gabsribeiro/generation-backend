@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.apache.catalina.connector.Response;
 import org.generation.personalblog.model.UserModel;
 import org.generation.personalblog.repository.UserRepository;
 import org.generation.personalblog.service.UserService;
@@ -46,7 +45,7 @@ public class UserController {
 	@PutMapping("/auth")
 	public ResponseEntity<Object> getCredentials(@Valid @RequestBody UserDTO loginPassword) {
 		Optional<?> accreditedObject = service.getCredentials(loginPassword);
-		if(accreditedObject.isPresent()) {
+		if (accreditedObject.isPresent()) {
 			return ResponseEntity.status(201).body(accreditedObject.get());
 		} else {
 			return ResponseEntity.status(400).build();

@@ -8,6 +8,8 @@ import javax.validation.Valid;
 import org.generation.personalblog.model.PostModel;
 import org.generation.personalblog.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,8 +21,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
-@RequestMapping("post")
+@RequestMapping("/api/post")
 @CrossOrigin("*")
 public class PostController {
 
@@ -30,6 +33,17 @@ public class PostController {
 	@GetMapping("/all")
 	public ResponseEntity<List<PostModel>> findAll() {
 		List<PostModel> listObject = repository.findAll();
+
+		if (listObject.isEmpty()) {
+			return ResponseEntity.status(204).build();
+		} else {
+			return ResponseEntity.status(200).body(listObject);
+		}
+	}
+	
+	@GetMapping("/page")
+	public ResponseEntity<Page<PostModel>> findAll(Pageable pageable) {
+		Page<PostModel> listObject = repository.findAll(pageable);
 
 		if (listObject.isEmpty()) {
 			return ResponseEntity.status(204).build();
