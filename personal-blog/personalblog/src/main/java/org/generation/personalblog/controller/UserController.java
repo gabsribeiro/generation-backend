@@ -38,7 +38,7 @@ public class UserController {
 		if (registeredObject.isPresent()) {
 			return ResponseEntity.status(201).body(registeredObject.get());
 		} else {
-			return ResponseEntity.status(400).build();
+			return ResponseEntity.status(401).build();
 		}
 	}
 
@@ -48,7 +48,7 @@ public class UserController {
 		if (accreditedObject.isPresent()) {
 			return ResponseEntity.status(201).body(accreditedObject.get());
 		} else {
-			return ResponseEntity.status(400).build();
+			return ResponseEntity.status(401).build();
 		}
 	}
 
