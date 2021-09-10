@@ -11,11 +11,6 @@ import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 @Entity
 @Table(name = "tb_post")
 public class PostModel {
@@ -39,5 +34,45 @@ public class PostModel {
 	@JoinColumn(name = "theme_id")
 	@JsonIgnoreProperties({ "themePosts" })
 	private ThemeModel relatedTheme;
+
+	public Long getIdPost() {
+		return idPost;
+	}
+
+	public void setIdPost(Long idPost) {
+		this.idPost = idPost;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public UserModel getUser() {
+		return user;
+	}
+
+	public void setUser(UserModel user) {
+		this.user = user;
+	}
+
+	public ThemeModel getRelatedTheme() {
+		return relatedTheme;
+	}
+
+	public void setRelatedTheme(ThemeModel relatedTheme) {
+		this.relatedTheme = relatedTheme;
+	}
 
 }
