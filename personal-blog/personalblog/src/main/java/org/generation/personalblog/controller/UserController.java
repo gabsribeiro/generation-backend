@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.generation.personalblog.model.UserModel;
+import org.generation.personalblog.model.User;
 import org.generation.personalblog.repository.UserRepository;
 import org.generation.personalblog.service.UserService;
 import org.generation.personalblog.utility.UserDTO;
@@ -33,7 +33,7 @@ public class UserController {
 	UserService service;
 
 	@PostMapping("/register")
-	public ResponseEntity<Object> registerUser(@Valid @RequestBody UserModel newUser) {
+	public ResponseEntity<Object> registerUser(@Valid @RequestBody User newUser) {
 		Optional<Object> registeredObject = service.registerUser(newUser);
 		if (registeredObject.isPresent()) {
 			return ResponseEntity.status(201).body(registeredObject.get());
@@ -53,8 +53,8 @@ public class UserController {
 	}
 
 	@GetMapping("/all")
-	public ResponseEntity<List<UserModel>> findAll() {
-		List<UserModel> listObject = repository.findAll();
+	public ResponseEntity<List<User>> findAll() {
+		List<User> listObject = repository.findAll();
 
 		if (listObject.isEmpty()) {
 			return ResponseEntity.status(204).build();
@@ -64,8 +64,8 @@ public class UserController {
 	}
 
 	@GetMapping("/{id_user}")
-	public ResponseEntity<UserModel> findById(@PathVariable(value = "id_user") Long idUser) {
-		Optional<UserModel> userObject = repository.findById(idUser);
+	public ResponseEntity<User> findById(@PathVariable(value = "id_user") Long idUser) {
+		Optional<User> userObject = repository.findById(idUser);
 
 		if (userObject.isPresent()) {
 			return ResponseEntity.status(200).body(userObject.get());
@@ -75,8 +75,8 @@ public class UserController {
 	}
 
 	@GetMapping("/name/{name}")
-	public ResponseEntity<List<UserModel>> findByName(@PathVariable(value = "name") String name) {
-		List<UserModel> listObject = repository.findAllByNameContainingIgnoreCase(name);
+	public ResponseEntity<List<User>> findByName(@PathVariable(value = "name") String name) {
+		List<User> listObject = repository.findAllByNameContainingIgnoreCase(name);
 
 		if (listObject.isEmpty()) {
 			return ResponseEntity.status(204).build();
@@ -86,12 +86,12 @@ public class UserController {
 	}
 
 	@PostMapping("/save")
-	public ResponseEntity<UserModel> save(@Valid @RequestBody UserModel newUser) {
+	public ResponseEntity<User> save(@Valid @RequestBody User newUser) {
 		return ResponseEntity.status(201).body(repository.save(newUser));
 	}
 
 	@PutMapping("/update")
-	public ResponseEntity<UserModel> update(@Valid @RequestBody UserModel userToUpdate) {
+	public ResponseEntity<User> update(@Valid @RequestBody User userToUpdate) {
 		return ResponseEntity.status(201).body(repository.save(userToUpdate));
 	}
 

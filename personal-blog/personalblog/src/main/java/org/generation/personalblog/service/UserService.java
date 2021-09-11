@@ -4,7 +4,7 @@ import java.nio.charset.Charset;
 import java.util.Optional;
 
 import org.apache.commons.codec.binary.Base64;
-import org.generation.personalblog.model.UserModel;
+import org.generation.personalblog.model.User;
 import org.generation.personalblog.repository.UserRepository;
 import org.generation.personalblog.utility.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class UserService {
 	@Autowired
 	private UserRepository repository;
 
-	public Optional<Object> registerUser(UserModel newUser) {
+	public Optional<Object> registerUser(User newUser) {
 		return repository.findByEmail(newUser.getEmail()).map(existingUser -> {
 			return Optional.empty();
 		}).orElseGet(() -> {

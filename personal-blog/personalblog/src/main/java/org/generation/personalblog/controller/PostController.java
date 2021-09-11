@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.generation.personalblog.model.PostModel;
+import org.generation.personalblog.model.Post;
 import org.generation.personalblog.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,8 +31,8 @@ public class PostController {
 	private PostRepository repository;
 
 	@GetMapping("/all")
-	public ResponseEntity<List<PostModel>> findAll() {
-		List<PostModel> listObject = repository.findAll();
+	public ResponseEntity<List<Post>> findAll() {
+		List<Post> listObject = repository.findAll();
 
 		if (listObject.isEmpty()) {
 			return ResponseEntity.status(204).build();
@@ -42,8 +42,8 @@ public class PostController {
 	}
 	
 	@GetMapping("/page")
-	public ResponseEntity<Page<PostModel>> findAll(Pageable pageable) {
-		Page<PostModel> listObject = repository.findAll(pageable);
+	public ResponseEntity<Page<Post>> findAll(Pageable pageable) {
+		Page<Post> listObject = repository.findAll(pageable);
 
 		if (listObject.isEmpty()) {
 			return ResponseEntity.status(204).build();
@@ -53,8 +53,8 @@ public class PostController {
 	}
 
 	@GetMapping("/{id_post}")
-	public ResponseEntity<PostModel> findById(@PathVariable(value = "id_post") Long idPost) {
-		Optional<PostModel> postObject = repository.findById(idPost);
+	public ResponseEntity<Post> findById(@PathVariable(value = "id_post") Long idPost) {
+		Optional<Post> postObject = repository.findById(idPost);
 
 		if (postObject.isPresent()) {
 			return ResponseEntity.status(200).body(postObject.get());
@@ -64,8 +64,8 @@ public class PostController {
 	}
 
 	@GetMapping("/title/{title}")
-	public ResponseEntity<List<PostModel>> findByTitle(@PathVariable(value = "title") String title) {
-		List<PostModel> listObject = repository.findAllByTitleContainingIgnoreCase(title);
+	public ResponseEntity<List<Post>> findByTitle(@PathVariable(value = "title") String title) {
+		List<Post> listObject = repository.findAllByTitleContainingIgnoreCase(title);
 
 		if (listObject.isEmpty()) {
 			return ResponseEntity.status(204).build();
@@ -75,12 +75,12 @@ public class PostController {
 	}
 
 	@PostMapping("/save")
-	public ResponseEntity<PostModel> save(@Valid @RequestBody PostModel newPost) {
+	public ResponseEntity<Post> save(@Valid @RequestBody Post newPost) {
 		return ResponseEntity.status(201).body(repository.save(newPost));
 	}
 
 	@PutMapping("/update")
-	public ResponseEntity<PostModel> update(@Valid @RequestBody PostModel postToUpdate) {
+	public ResponseEntity<Post> update(@Valid @RequestBody Post postToUpdate) {
 		return ResponseEntity.status(201).body(repository.save(postToUpdate));
 	}
 

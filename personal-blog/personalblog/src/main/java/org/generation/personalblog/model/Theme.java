@@ -15,8 +15,8 @@ import javax.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "tb_table")
-public class ThemeModel {
+@Table(name = "tb_theme")
+public class Theme {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +27,7 @@ public class ThemeModel {
 
 	@OneToMany(mappedBy = "relatedTheme", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties({ "relatedTheme" })
-	private List<PostModel> themePosts = new ArrayList<>();
+	private List<Post> themePosts = new ArrayList<>();
 
 	public Long getIdTheme() {
 		return idTheme;
@@ -45,11 +45,11 @@ public class ThemeModel {
 		this.theme = theme;
 	}
 
-	public List<PostModel> getThemePosts() {
+	public List<Post> getThemePosts() {
 		return themePosts;
 	}
 
-	public void setThemePosts(List<PostModel> themePosts) {
+	public void setThemePosts(List<Post> themePosts) {
 		this.themePosts = themePosts;
 	}
 

@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tb_post")
-public class PostModel {
+public class Post {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,12 +28,12 @@ public class PostModel {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	@JsonIgnoreProperties({ "userPosts" })
-	private UserModel user;
+	private User user;
 
 	@ManyToOne
 	@JoinColumn(name = "theme_id")
 	@JsonIgnoreProperties({ "themePosts" })
-	private ThemeModel relatedTheme;
+	private Theme relatedTheme;
 
 	public Long getIdPost() {
 		return idPost;
@@ -59,19 +59,19 @@ public class PostModel {
 		this.text = text;
 	}
 
-	public UserModel getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(UserModel user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 
-	public ThemeModel getRelatedTheme() {
+	public Theme getRelatedTheme() {
 		return relatedTheme;
 	}
 
-	public void setRelatedTheme(ThemeModel relatedTheme) {
+	public void setRelatedTheme(Theme relatedTheme) {
 		this.relatedTheme = relatedTheme;
 	}
 
