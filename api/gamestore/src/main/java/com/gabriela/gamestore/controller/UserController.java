@@ -83,7 +83,7 @@ public class UserController {
 		}
 	}
 
-	@PutMapping("/save")
+	@PutMapping("/update")
 	public ResponseEntity<User> update(@Valid @RequestBody User userToUpdate) {
 		return ResponseEntity.status(201).body(repository.save(userToUpdate));
 	}

@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -22,16 +23,21 @@ public class Product {
 	@NotBlank
 	private String product;
 
-	@NotBlank
+	@NotNull
 	private Double price;
 
-	@NotBlank
+	@NotNull
 	private Long stock;
 
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	@JsonIgnoreProperties({ "products" })
 	private Category category;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	@JsonIgnoreProperties({ "userProducts" })
+	private User user;
 
 	public Long getIdProduct() {
 		return idProduct;
@@ -71,6 +77,14 @@ public class Product {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

@@ -1,16 +1,21 @@
 package com.gabriela.gamestore.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tb_user")
@@ -30,9 +35,12 @@ public class User {
 	@NotBlank
 	private String password;
 
-	@NotBlank
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate birthDate;
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties({ "user" })
+	private List<Product> userProducts = new ArrayList<>();
 
 	public User() {
 	}
@@ -84,6 +92,14 @@ public class User {
 
 	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
+	}
+
+	public List<Product> getUserProducts() {
+		return userProducts;
+	}
+
+	public void setUserProducts(List<Product> userProducts) {
+		this.userProducts = userProducts;
 	}
 
 }
