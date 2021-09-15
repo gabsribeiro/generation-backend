@@ -21,7 +21,7 @@ import com.gabriela.gamestore.model.Product;
 import com.gabriela.gamestore.repository.ProductRepository;
 
 @RestController
-@RequestMapping("api/product")
+@RequestMapping("/api/product")
 @CrossOrigin("*")
 public class ProductController {
 

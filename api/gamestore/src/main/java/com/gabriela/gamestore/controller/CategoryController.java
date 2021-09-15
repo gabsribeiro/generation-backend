@@ -21,7 +21,7 @@ import com.gabriela.gamestore.model.Category;
 import com.gabriela.gamestore.repository.CategoryRepository;
 
 @RestController
-@RequestMapping("api/category")
+@RequestMapping("/api/category")
 @CrossOrigin("*")
 public class CategoryController {
 
