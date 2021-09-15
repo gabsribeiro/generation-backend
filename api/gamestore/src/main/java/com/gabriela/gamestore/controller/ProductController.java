@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gabriela.gamestore.model.Category;
 import com.gabriela.gamestore.model.Product;
-import com.gabriela.gamestore.repository.CategoryRepository;
 import com.gabriela.gamestore.repository.ProductRepository;
 
 @RestController
