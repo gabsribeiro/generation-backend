@@ -9,7 +9,9 @@ import org.generation.personalblog.model.User;
 import org.generation.personalblog.repository.UserRepository;
 import org.generation.personalblog.service.UserService;
 import org.generation.personalblog.utility.UserDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api/user")
@@ -89,15 +92,27 @@ public class UserController {
 	public ResponseEntity<User> save(@Valid @RequestBody User newUser) {
 		return ResponseEntity.status(201).body(repository.save(newUser));
 	}
-
+	
 	@PutMapping("/update")
-	public ResponseEntity<User> update(@Valid @RequestBody User userToUpdate) {
-		return ResponseEntity.status(201).body(repository.save(userToUpdate));
+	public ResponseEntity<Object> changeUser(@Valid @RequestBody UserDTO userChanges) {
+		Optional<?> objectUpdate = service.changeUser(userChanges);
+
+		if (objectUpdate.isPresent()) {
+			return ResponseEntity.status(201).body(objectUpdate.get());
+		} else {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id de usuario invalido!", null);
+		}
 	}
 
 	@DeleteMapping("/delete/{id_user}")
-	public void deleteUserById(@PathVariable(value = "id_user") Long idUser) {
-		repository.deleteById(idUser);
+	public ResponseEntity<Object> deleteUserById(@PathVariable(value = "id_user") Long idUser) {
+		Optional<User> objectOptional = repository.findById(idUser);
+		if (objectOptional.isEmpty()) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Id de usuario invalido!", null);
+		} else {
+			repository.deleteById(idUser);
+			return ResponseEntity.status(200).build();
+		}
 	}
 
 }

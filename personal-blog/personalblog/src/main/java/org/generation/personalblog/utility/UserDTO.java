@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 
 public class UserDTO {
 
-	private Long id;
+	private Long idUser;
 
 	private String name;
 
@@ -18,13 +18,17 @@ public class UserDTO {
 	private String password;
 
 	private String token;
+	
+	private String photo;
+	
+	private String type;
 
-	public Long getId() {
-		return id;
+	public Long getIdUser() {
+		return idUser;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdUser(Long idUser) {
+		this.idUser = idUser;
 	}
 
 	public String getName() {
@@ -57,6 +61,22 @@ public class UserDTO {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

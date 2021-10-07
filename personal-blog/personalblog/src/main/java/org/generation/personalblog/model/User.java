@@ -1,6 +1,5 @@
 package org.generation.personalblog.model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -15,7 +14,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -35,21 +33,24 @@ public class User {
 
 	@NotBlank
 	private String password;
-	
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	private LocalDate birthDate;
+
+	private String photo;
+
+	private String type;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties({ "user" })
 	private List<Post> userPosts = new ArrayList<>();
 
-	public User(Long idUser, String name, String email, String password, LocalDate birthDate) {
+	public User(Long idUser, String name, String email, String password, String photo,
+			String type) {
 		this.idUser = idUser;
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		this.birthDate = birthDate;
-	}	
+		this.photo = photo;
+		this.type = type;
+	}
 
 	public User() {
 	}
@@ -85,14 +86,6 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	public LocalDate getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(LocalDate birthDate) {
-		this.birthDate = birthDate;
-	}
 
 	public List<Post> getUserPosts() {
 		return userPosts;
@@ -100,6 +93,22 @@ public class User {
 
 	public void setUserPosts(List<Post> userPosts) {
 		this.userPosts = userPosts;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }

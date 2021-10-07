@@ -36,9 +36,11 @@ public class UserService {
 				byte[] authBase64 = Base64.encodeBase64(basicStructure.getBytes(Charset.forName("US-ASCII")));
 				String authHeader = "Basic " + new String(authBase64);
 				authUser.setToken(authHeader);
-				authUser.setId(existingUser.getIdUser());
+				authUser.setIdUser(existingUser.getIdUser());
 				authUser.setName(existingUser.getName());
 				authUser.setPassword(existingUser.getPassword());
+				authUser.setPhoto(existingUser.getPhoto());
+				authUser.setType(existingUser.getType());
 				return Optional.ofNullable(authUser);
 			} else {
 				return Optional.empty();
@@ -47,4 +49,18 @@ public class UserService {
 			return Optional.empty();
 		});
 	}
+	
+	public Optional<?> changeUser(UserDTO userChanges) {
+		return repository.findById(userChanges.getIdUser()).map(existingUser -> {
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			String result = encoder.encode(userChanges.getPassword());
+			
+			existingUser.setName(userChanges.getName());
+			existingUser.setPassword(result);
+			return Optional.ofNullable(repository.save(existingUser));
+		}).orElseGet(() -> {
+			return Optional.empty();
+		});
+	}
+
 }

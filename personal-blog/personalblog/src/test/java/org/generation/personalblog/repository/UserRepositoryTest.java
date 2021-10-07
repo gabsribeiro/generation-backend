@@ -3,8 +3,6 @@ package org.generation.personalblog.repository;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.generation.personalblog.model.User;
@@ -26,18 +24,15 @@ public class UserRepositoryTest {
 
 	@BeforeAll
 	void start() {
-		LocalDate date = LocalDate.parse("1993-11-07", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		User user = new User(0L, "Gabriela de Santana Ribeiro", "gabriela@email.com", "12345678", date);
+		User user = new User(0L, "Gabriela de Santana Ribeiro", "gabriela@email.com", "12345678", "", "");
 		if (!repository.findByEmail(user.getEmail()).isPresent())
 			repository.save(user);
 
-		date = LocalDate.parse("2000-11-30", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		user = new User(0L, "Giovanna Santana Ribeiro", "giovanna@email.com", "12345678", date);
+		user = new User(0L, "Giovanna Santana Ribeiro", "giovanna@email.com", "12345678", "", "");
 		if (!repository.findByEmail(user.getEmail()).isPresent())
 			repository.save(user);
 
-		date = LocalDate.parse("1969-03-12", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		user = new User(0L, "Damiana Santana", "damiana@email.com", "12345678", date);
+		user = new User(0L, "Damiana Santana", "damiana@email.com", "12345678", "", "");
 		if (!repository.findByEmail(user.getEmail()).isPresent())
 			repository.save(user);
 	}

@@ -20,13 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/theme")
+@RequestMapping("/api/theme")
 @CrossOrigin("*")
 public class ThemeController {
 
 	@Autowired
 	private ThemeRepository repository;
-
+	
 	@GetMapping("/all")
 	public ResponseEntity<List<Theme>> findAll() {
 		List<Theme> listObject = repository.findAll();

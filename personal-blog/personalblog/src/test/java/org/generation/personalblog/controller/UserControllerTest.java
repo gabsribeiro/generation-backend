@@ -2,9 +2,6 @@ package org.generation.personalblog.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import org.generation.personalblog.model.User;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -36,11 +33,9 @@ public class UserControllerTest {
 
 	@BeforeAll
 	void start() {
-		LocalDate dateUserToAdd = LocalDate.parse("1993-06-21", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		userToAdd = new User(0L, "Bárbara Cristiane", "barbara@email.com", "12345678", dateUserToAdd);
+		userToAdd = new User(0L, "Bárbara Cristiane", "barbara@email.com", "12345678", "", "");
 
-		LocalDate dateUserToUpdate = LocalDate.parse("1993-11-07", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		userToUpdate = new User(1L, "Gabriela Ribeiro", "gabriela@email.com", "harry1234", dateUserToUpdate);
+		userToUpdate = new User(1L, "Gabriela Ribeiro", "gabriela@email.com", "harry1234", "", "");
 	}
 
 	@Test
